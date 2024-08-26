@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition FOR ZINTEG_SETUP'
+define service ZSD_INTEGSETUP {
+  expose ZC_INTEGSETUP;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Project'
+define service ZSD_PROJECT {
+  expose ZC_PROJECT;
+  expose ZC_PROJECT_TASK;
+}

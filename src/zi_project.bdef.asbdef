@@ -1,0 +1,106 @@
+managed implementation in class zbp_i_project unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZI_PROJECT alias Project
+persistent table zproject
+draft table zproject_draft
+lock master total etag LastChangedAt
+
+//lock master
+//late numbering
+authorization master(global)
+//authorization master(instance)
+
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete (features : global );
+    association _projecttasks { create; }
+
+
+  field ( readonly:update ) ProjectUuid;
+  field (numbering : managed) ProjectUuid;
+  //field ( readonly ) ProjectId;
+
+action Release;
+
+action (features : instance)ChangeStatus parameter zstatus_change;
+
+validation DetermineProjectStatus on save {create;update; field ProjectName;}
+
+determination DefaultProjectStatus on save {create;update; field ProjectName;}
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zproject
+  {
+      ProjectUuid = project_uuid;
+      ProjectId = project_id;
+      ProjectName = project_name;
+      ZEmployeeResponsible = z_employee_responsible;
+      ZProjectStatus = z_project_status;
+      ProjectType = project_type;
+      BillType = z_billtype;
+      TotalProjectCost = totalprojectcost;
+      TotalProjectCostCurrencyCode = totalprojectcostcurrencycode;
+//      Attachment = attachment;
+      NewAttachment = newattachment;
+      MimeType = mimetype;
+      Filename = filename;
+      CreatedBy = created_by;
+      CreatedAt = created_at;
+      LastChangedBy = last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt = last_changed_at;
+      ProjectStartDate = projectstartdate;
+      ProjectEndDate = projectenddate;
+   }
+}
+
+define behavior for ZI_PROJECT_TASK alias ProjectTasks
+persistent table zproject_task
+draft table zprojtask_d
+//authorization master(global)
+
+
+lock dependent by _project
+authorization dependent by _project
+//etag master <field_name>
+{
+  update;
+  delete;
+  association _project{with draft;}
+
+  action (features : instance)ChangeTaskStatus;
+
+
+  determination DetermineTotalProjectCost on modify {create;update; field ServiceUnitPrice;}
+
+  side effects { field ServiceUnitPrice affects field _project.TotalProjectCost;}
+
+
+  field ( readonly:update ) ProjectTaskItemUuid;
+  field ( readonly:update ) ProjectUuid;
+  field (numbering : managed) ProjectTaskItemUuid;
+
+
+
+
+ mapping for zproject_task{
+            ProjectUuid = project_uuid;
+            ProjectTaskItemUuid = project_task_item_uuid;
+            ProjectTaskName = project_task_name;
+            ServiceID = service_id;
+            ServiceName = service_name;
+            ServiceUnitPrice = serviceunitprice;
+            ServiceCurrencyCode = servicecurrencycode;
+            TaskStatus = z_task_status;
+      }
+}

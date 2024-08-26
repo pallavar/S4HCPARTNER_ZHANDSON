@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition FOR ZTASK'
+define service ZSD_Task_App {
+  expose ZC_TASK;
+  expose ZC_TASK_ITEM;
+}

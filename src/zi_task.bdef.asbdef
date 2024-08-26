@@ -1,0 +1,71 @@
+managed implementation in class zbp_i_task unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZI_TASK alias Task
+persistent table ztask
+draft table ztask_d
+lock master total etag LastChangedAt
+authorization master(global)
+//late numbering
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _item { create;with draft; }
+  field ( readonly:update ) TaskUuid;
+  field (numbering : managed) TaskUuid;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+      mapping for ztask{
+
+      TaskUuid = task_uuid;
+      TaskId = task_id;
+      TaskName = task_name;
+      EmpID = z_emp_id;
+      Status = overallstatus;
+      StatusDesc = overallstatusdesc;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt = last_changed_at;
+      Gender = z_gender;
+
+      }
+}
+
+
+define behavior for ZI_TASK_ITEM alias TaskItem
+persistent table ztask_item
+draft table ZTASK_ITEM_DRAFT
+
+lock dependent by _task
+authorization dependent by _task
+//etag master <field_name>
+{
+  update;
+  delete;
+  association _task{with draft;}
+
+  field ( readonly:update ) TaskUuid;
+  field ( readonly:update ) TaskItemUuid;
+  field (numbering : managed) TaskItemUuid;
+
+  validation DueDateValidation on save {create; field DueDate;}
+
+
+ mapping for ztask_item{
+
+      TaskItemUuid = task_item_uuid;
+      TaskUuid = task_uuid;
+      TaskItemId = task_item_id;
+      SubTaskName = sub_task_name;
+      DueDate = due_date;
+      }
+
+}

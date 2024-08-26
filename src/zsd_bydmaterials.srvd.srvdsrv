@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition FOR ZBYD_MATERIALS'
+define service ZSD_BYDMATERIALS {
+  expose ZC_BYDMATERIALS;
+  expose ZC_BYD_MAT_LOG;
+}
