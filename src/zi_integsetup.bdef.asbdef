@@ -1,0 +1,48 @@
+managed implementation in class zbp_i_integsetup unique;
+strict ( 2 );
+
+
+define behavior for ZI_INTEGSETUP alias zinteg_setup
+persistent table zinteg_setup
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+
+  field ( numbering : managed )
+   ZConfigurationUUID;
+
+  field ( readonly )
+   ZConfigurationUUID,
+   CreatedBy,
+   CreatedAt,
+   LastChangedBy,
+   LastChangedAt;
+
+  create;
+  update;
+  delete;
+
+  action GetAccessToken;
+
+ determination CallAccessToken on save {create;update; field ZAccessToken;}
+
+
+
+  mapping for zinteg_setup
+  {
+    ZConfigurationUUID = z_configuration_uuid;
+    ZID = z_id;
+    ZGrantType = z_grant_type;
+    ZClientID = z_client_id;
+    ZClientSecret = z_client_secret;
+    ZAccessToken = z_access_token;
+    ZTokenType = z_token_type;
+    ZExpiresIn = z_expires_in;
+    ZStatus = z_status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+  }
+}

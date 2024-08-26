@@ -1,0 +1,77 @@
+managed implementation in class zbp_i_bydmaterials unique;
+strict ( 2 );
+
+define behavior for ZI_BYDMATERIALS alias bydmaterials
+persistent table zbyd_materials
+lock master
+authorization master ( instance )
+etag master ZLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+   //field ( readonly:update )
+  // ZMaterialInternalId;
+  association _BydMaterialLog{create;}
+
+  field ( readonly:update ) ZMaterialInternalId;
+   field ( readonly )
+   ZCreatedAt,
+   ZCreatedBy,
+   ZLastChangedAt,
+   ZLastChangedBy;
+
+  action Create;
+  action Update;
+  action GetAccessToken;
+
+
+
+      mapping for zbyd_materials
+      {
+        ZMaterialInternalId = z_material_internal_id;
+        ZMaterialName = z_material_name;
+        ZBaseUom = z_base_uom;
+        ZPlanningUom = z_planning_uom;
+        ZCreatedAt =z_created_at ;
+        ZCreatedBy = z_created_by;
+        ZLastChangedAt = z_last_changed_at;
+        ZLastChangedBy = z_last_changed_by;
+        ZLocalLastChangedAt = z_local_last_changed_at;
+      }
+  }
+
+
+define behavior for ZI_BYD_MAT_LOG alias bydmatlog
+persistent table zbyd_mat_log
+lock dependent by _BydMaterials
+authorization dependent by _BydMaterials
+{
+  update;
+  delete;
+
+    association _BydMaterials;
+
+
+  field ( readonly:update ) ZMaterialInternalId;
+  field ( readonly:update ) ZLogUuid;
+  field (numbering : managed) ZLogUuid;
+
+
+
+  mapping for zbyd_mat_log{
+
+        ZLogUuid = z_log_uuid;
+        ZLogId = z_log_id;
+        ZLogText = z_log_text;
+        ZLogCreatedon = z_log_createdon;
+        ZMaterialInternalId = z_material_internal_id;
+//        ZCreatedBy = z_created_by;
+//        ZCreatedAt = z_created_at;
+//        ZLastChangedBy = z_last_changed_by;
+//        ZLastChangedAt = z_last_changed_at;
+//        ZLocalLastChangedAt = z_local_last_changed_at;
+      }
+
+}
