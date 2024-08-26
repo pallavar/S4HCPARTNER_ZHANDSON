@@ -1,0 +1,9 @@
+extension using interface i_salesordertp
+implementation in class zbp_xe4_giftcard_ext unique;
+
+extend behavior for SalesOrder
+{
+
+  field(mandatory) zz_testfield_sdh;
+
+}
