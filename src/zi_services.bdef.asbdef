@@ -1,0 +1,70 @@
+managed implementation in class zbp_i_services unique;
+strict ( 2 );
+
+define behavior for ZI_SERVICES alias services
+persistent table zservices
+lock master
+late numbering
+authorization master ( instance )
+//authorization master(global)
+
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  association _EmpServices { create; }
+
+
+ field ( readonly ) ServiceId,CreatedAt,CreatedBy,LastChangedAt,LastChangedBy;
+
+  mapping for zservices
+  {
+      ServiceId  = service_id;
+      ServiceName = service_name;
+      UnitPrice = unitprice;
+      CurrCode = currencycode;
+      CreatedBy = created_by;
+      CreatedAt = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+      LoclLastChangedAt = locl_last_changed_at;
+      ServiceDate = servicedate;
+   }
+
+}
+
+
+define behavior for ZI_EMPSERVICES alias EmpServices
+persistent table zempservices
+//draft table zprojtask_d
+//authorization master(global)
+
+
+lock dependent by _Services
+authorization dependent by _Services
+//etag master <field_name>
+{
+  update;
+  delete;
+ association _Services;
+
+//  determination DetermineTotalProjectCost on modify {create;update; field ServiceUnitPrice;}
+//
+//  side effects { field ServiceUnitPrice affects field _project.TotalProjectCost;}
+
+
+ field ( readonly:update ) ZEmpId;
+ field ( readonly:update ) ServiceId;
+
+//  field (numbering : managed) ProjectTaskItemUuid;
+
+
+ mapping for zempservices{
+
+                ServiceId = service_id;
+                 ZEmpId = z_emp_id;
+                 ProjectName = project_name;
+      }
+}
