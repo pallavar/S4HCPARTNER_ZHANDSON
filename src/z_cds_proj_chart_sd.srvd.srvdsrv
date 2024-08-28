@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Project Chart'
+define service Z_CDS_PROJ_CHART_SD {
+  expose Z_CDS_PROJECT_CHART;
+}
