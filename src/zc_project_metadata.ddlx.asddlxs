@@ -1,0 +1,195 @@
+@Metadata.layer: #CORE
+
+
+annotate view ZC_PROJECT
+    with 
+{
+     @UI.facet: [
+     
+       {
+          id: 'ProjectID',
+          purpose: #HEADER,
+          type: #DATAPOINT_REFERENCE,
+          position: 10,
+          targetQualifier: 'SysProjID'
+        },
+        {
+          id: 'ProjectName',
+          purpose: #HEADER,
+          type: #DATAPOINT_REFERENCE,
+          position: 20,
+          targetQualifier: 'SysProjName'
+        }
+//        {
+//          id: 'AdminSection',
+//          purpose:#STANDARD,
+//          type: #FIELDGROUP_REFERENCE,
+//          label: 'Admin Info',
+//          position: 30,
+//          parentId: 'ServiceGeneralInfo',   
+//          targetQualifier: 'AdminSection'
+//         }
+//         {
+//          id: 'Upload',
+//          purpose: #STANDARD,
+//          type: #FIELDGROUP_REFERENCE,
+//          parentId: 'ServiceGeneralInfo',
+//          label: 'Upload Invoice',
+//          position: 20,
+//          targetQualifier: 'Upload'
+//                  }
+  ]   
+  
+    @EndUserText.label: 'Project ID'
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 10 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 10}]
+    @UI.identification: [{ position: 10 }]
+    @UI.selectionField: [{ position: 10 }]
+    @UI.dataPoint: { qualifier: 'SysProjID', title: 'Project ID'}
+//    @Consumption.valueHelpDefinition: [{ entity : {name: 'ZI_PROJECT', element: 'ProjectId'  } }]
+    
+    ProjectId;
+    
+    @EndUserText.label: 'Project Name'
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 20 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    @UI.selectionField: [{ position: 20 }]
+    @UI.dataPoint: { qualifier: 'SysProjName', title: 'Project Name'}
+    ProjectName;
+    
+    @EndUserText.label: 'Employee Responsible'
+    @UI.textArrangement: #TEXT_ONLY
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 30 }]
+    @UI.identification: [{ position: 30 }]
+    @UI.selectionField: [{ position: 30 }]
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 30 }]
+
+//    @Consumption.valueHelpDefinition: [{ entity : {name: 'I_BusinessPartner', element: 'partner'  } }]
+        
+    @Consumption.valueHelpDefinition: [{ entity : {name: 'ZI_CUSTOM_CDS_EMP', element: 'ZEmpId'  } }]
+//    Z_CDS_Employee
+    
+    //  @Consumption.valueHelpDefinition: [{ entity : {name: 'I_Product', element: 'MEINS'  } }]
+    
+    ZEmployeeResponsible;
+    
+    
+    @EndUserText.label: 'Project Status'
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 40 },{  type: #FOR_ACTION,dataAction: 'RELEASE',label: 'Release' },{ type: #FOR_ACTION, dataAction: 'ChangeStatus', label: 'Change Status' }]
+    @UI.identification: [{ position: 40 }]
+    @UI.selectionField: [{ position: 40 }]
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 40 }]
+//    @Consumption.valueHelpDefinition: 
+//      [{ entity: { name : 'ZI_DOMAIN_FIX_VAL' , element: 'description' } ,
+//         additionalBinding: [{ element: 'domain_name',
+//                               localConstant: 'Z_PROJECTSTATUS_DATAELEMENT', usage: #FILTER }]
+//                               , distinctValues: true
+//                               }]
+                               ZProjectStatus;
+                               
+                               
+                           
+    
+    
+    @EndUserText.label: 'Project Type'
+    @Search.defaultSearchElement: true
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 50 }]
+    @UI.lineItem: [{ position: 50 }]
+    @UI.identification: [{ position: 50 }]
+    @UI.selectionField: [{ position: 50 }]
+
+//    @Consumption.valueHelpDefinition: 
+//      [{ entity: { name : 'ZI_DOMAIN_FIX_VAL' , element: 'description' } ,
+//         additionalBinding: [{ element: 'domain_name',
+//                               localConstant: 'Z_PROJTYPE_DATAELEMENT', usage: #FILTER }]
+//                               , distinctValues: true
+//                               }]
+    ProjectType;
+    
+                               
+                               
+    @EndUserText.label: 'Bill Type'
+    //@UI.textArrangement: #TEXT_ONLY
+    @Search.defaultSearchElement: true
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 60 }]
+    @UI.selectionField: [{ position: 60 }] 
+    @UI.identification: [{ position: 60 }]
+    @UI.lineItem: [{ position: 60 }]
+    @Consumption.valueHelpDefinition: 
+      [{ entity: { name : 'ZI_DOMAIN_FIX_VAL' , element: 'description' } ,
+         additionalBinding: [{ element: 'domain_name',
+                               localConstant: 'Z_BILLTYPE_DATAELEMENT', usage: #FILTER }]
+                               , distinctValues: true
+                               }]
+    BillType; 
+    
+    @EndUserText.label: 'Project Costs'
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 70 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 70 }]
+    @UI.identification: [{ position: 70 }]
+    @UI.selectionField: [{ position: 70 }]
+    //@UI.dataPoint: { qualifier: 'SysProjName', title: 'Project Name'}
+    
+    TotalProjectCost;
+    
+    @EndUserText.label: 'Start Date'
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 80 }]
+    @Search.defaultSearchElement: true
+    @UI.identification: [{ position: 80 }]
+    @UI.selectionField: [{ position: 80 }]
+    ProjectStartDate;
+    
+    @EndUserText.label: 'End Date'
+    @UI.fieldGroup: [{ qualifier: 'ProjectGeneralInfo', position: 90 }]
+    @Search.defaultSearchElement: true
+    @UI.identification: [{ position: 90 }]
+    @UI.selectionField: [{ position: 90 }]
+    ProjectEndDate;
+   
+    
+//     @UI:
+//      { fieldGroup:     [ { position: 10, qualifier: 'Upload' , label: 'Attachment'} ]}
+//      Attachment;
+
+      @UI.fieldGroup: [ { qualifier: 'Upload' ,position: 10,  label: 'Attachmentsss'} ]
+      @UI.lineItem: [{ position: 100 }]
+      NewAttachment;
+    
+      @UI.hidden: false
+      MimeType;
+    
+      @UI.hidden: false
+      Filename;
+    
+    @EndUserText.label: 'Created By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 10 }]
+    @Search.defaultSearchElement: true
+    CreatedBy;
+    
+    @EndUserText.label: 'Created At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 20 }]
+    @Search.defaultSearchElement: true
+    CreatedAt;
+    
+    @EndUserText.label: 'Last Changed By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 30 }]
+    @Search.defaultSearchElement: true
+    LastChangedBy;
+ 
+    @EndUserText.label: 'Last Changed At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 40 }]
+    @Search.defaultSearchElement: true
+    LastChangedAt;   
+    
+  
+    
+   
+      
+    
+}

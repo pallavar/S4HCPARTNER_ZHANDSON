@@ -1,0 +1,41 @@
+@Metadata.layer: #CORE
+annotate view ZC_TASK_ITEM
+    with 
+{
+    @UI.facet: [
+                  {
+                      id: 'TaskItem',
+                      purpose: #STANDARD,
+                      type: #IDENTIFICATION_REFERENCE,
+                      label: 'Task Edit',
+                      position: 10
+                  }
+               ]
+               
+                  
+                   
+               
+    @EndUserText.label: 'Task Item ID1'
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 10 }]
+   //  @UI.lineItem: [ { position: 10, label: ' ', value: 'media.licdn.com/dms/image/sync/D5627AQGZ3lqVVSMPwA/articleshare-shrink_800/0/1704341338132?e=2147483647&v=beta&t=nArsebIkvAubquS65C8Z9frRkdiNaZA5gvuapo2BRK0' } ]
+    @UI.identification: [{ position: 10 }]
+    @UI.selectionField: [{ position: 10 }]
+    TaskItemId;
+    
+    @EndUserText.label: 'Sub Task Name213'
+    @Search.defaultSearchElement: true
+     @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    @UI.selectionField: [{ position: 20 }]
+    SubTaskName;
+    
+    @EndUserText.label: 'Due1 Date121'
+    @Search.defaultSearchElement: true
+     @UI.lineItem: [{ position: 30 }]
+    @UI.identification: [{ position: 30 }]
+    @UI.selectionField: [{ position: 30 }]
+    DueDate;
+               
+    
+}
