@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for DOMAIN_FIX_VAL'
+define service Z_SD_DOMAIN_FIX_VAL {
+  expose ZI_DOMAIN_FIX_VAL;
+}
