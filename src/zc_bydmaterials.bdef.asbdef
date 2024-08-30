@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_BYDMATERIALS alias bydmaterials
+use etag
+{
+  use create;
+  use update;
+  use delete;
+ use association _BydMaterialLog { create;}
+  use action Create;
+  use action Update;
+  use action GetAccessToken;
+
+
+
+}
+
+
+define behavior for ZC_BYD_MAT_LOG alias bydmaterialslog
+use etag
+{
+  use update;
+  use delete;
+
+  use association _BydMaterials;
+
+
+}

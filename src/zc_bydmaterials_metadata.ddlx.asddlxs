@@ -1,0 +1,119 @@
+@Metadata.layer: #CORE
+annotate entity ZC_BYDMATERIALS
+    with 
+{
+     @UI.facet: [
+                   {
+                      label: 'ByD Material General Info',
+                      id: 'MaterialGeneralInfo',
+                      type: #COLLECTION,
+                      position: 10
+                   },
+                   {
+                      id: 'MaterialInfo',
+                      purpose:#STANDARD,
+                      type: #IDENTIFICATION_REFERENCE,
+                      label: 'Material Info',
+                      position: 10,
+                      parentId: 'MaterialGeneralInfo'                                                      
+                   },
+                   {
+                      id: 'AdminSection',
+                      purpose:#STANDARD,
+                      type: #FIELDGROUP_REFERENCE,
+                      label: 'Admin Info',
+                      position: 20,
+                      parentId: 'MaterialGeneralInfo',   
+                      targetQualifier: 'AdminSection'
+                   },
+                   {
+                      id: 'MaterialId',
+                      purpose: #HEADER,
+                      type: #DATAPOINT_REFERENCE,
+                      position: 10,
+                      targetQualifier: 'MatID'
+                    },
+                    {
+                      id: 'MaterialName',
+                      purpose: #HEADER,
+                      type: #DATAPOINT_REFERENCE,
+                      position: 20,
+                      targetQualifier: 'MatName'
+                    },
+                    {
+                      id: 'BaseUoM',
+                      purpose: #HEADER,
+                      type: #DATAPOINT_REFERENCE,
+                      position: 30,
+                      targetQualifier: 'Baseuom'
+                    }
+     ]
+     
+     
+    @EndUserText.label: 'Material ID'
+    @UI.identification: [{ position: 10 }]
+    @UI.fieldGroup: [{ qualifier: 'ServiceInfo', position: 10 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 10}]
+    @UI.selectionField: [{ position: 10 }
+    ]
+    @UI.dataPoint: { qualifier: 'MatID', title: 'Material ID'}
+    ZMaterialInternalId;
+    
+    @EndUserText.label: 'Material Name'
+    @UI.fieldGroup: [{ qualifier: 'ServiceInfo', position: 20 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    @UI.selectionField: [{ position: 20 }]
+    @UI.dataPoint: { qualifier: 'MatName', title: 'Material Name'}
+    ZMaterialName;
+     
+    @EndUserText.label: 'Base UoM'
+    @UI.fieldGroup: [{ qualifier: 'ServiceInfo', position: 20 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    @UI.selectionField: [{ position: 20 }]
+    @UI.dataPoint: { qualifier: 'Baseuom', title: 'Base Uom'}
+    ZBaseUom;
+    
+    @UI: { 
+     lineItem: [ { position: 90, importance: #HIGH } ,
+                 { type: #FOR_ACTION, dataAction: 'GetAccessToken', label: 'Get Access Token' } ,
+                 { type: #FOR_ACTION, dataAction: 'Create', label: 'Create' } ,
+                 { type: #FOR_ACTION, dataAction: 'Update', label: 'Update' } 
+     ], 
+     
+     identification: [ { position: 90 } ,
+                     { type: #FOR_ACTION, dataAction: 'GetAccessToken', label: 'Get Access Token' },
+                     { type: #FOR_ACTION, dataAction: 'Create', label: 'Create' },
+                     { type: #FOR_ACTION, dataAction: 'Update', label: 'Update' } 
+                  ], 
+     
+     textArrangement: #TEXT_ONLY 
+     }
+      
+    @EndUserText.label: 'Created By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 10 }]
+    @Search.defaultSearchElement: true
+    ZCreatedBy;
+    
+    @EndUserText.label: 'Created At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 20 }]
+    @Search.defaultSearchElement: true
+    ZCreatedAt;
+    
+    @EndUserText.label: 'Last Changed By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 30 }]
+    @Search.defaultSearchElement: true
+    ZLastChangedBy;
+ 
+    @EndUserText.label: 'Last Changed At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 40 }]
+    @Search.defaultSearchElement: true
+    ZLastChangedAt;   
+    
+    
+     
+}
