@@ -1,0 +1,98 @@
+@Metadata.layer: #CORE
+annotate entity ZI_INTEGSETUP
+    with 
+{
+    @UI.facet: [
+                    {
+                      label: 'Configuration Setup',
+                      id: 'ConfigSetup',
+                      type: #COLLECTION,
+                      position: 10
+                   },
+                   {
+                      id: 'ConfigInfo',
+                      purpose:#STANDARD,
+                      type: #IDENTIFICATION_REFERENCE,
+                      label: 'Config Info',
+                      position: 10,
+                      parentId: 'ConfigSetup'                                
+                   },
+                   {
+                      id: 'AdminInfo',
+                      purpose:#STANDARD,
+                      type: #FIELDGROUP_REFERENCE,
+                      label: 'Admin Info',
+                      position: 20,
+                      parentId: 'ConfigSetup',   
+                      targetQualifier: 'AdminSection'
+                   }
+                ]  
+            
+    
+    @EndUserText.label: 'Z ID'
+    @UI.identification: [{ position: 10 }]
+    @UI.fieldGroup: [{ qualifier: 'ConfigInfo', position: 10 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 10}]
+    @UI.selectionField: [{ position: 10 }]
+    //@UI.dataPoint: { qualifier: 'SysServID', title: 'Service ID'}
+    ZId;
+    
+    
+    @EndUserText.label: 'Client ID'
+    @UI.identification: [{ position: 20 }]
+    @UI.fieldGroup: [{ qualifier: 'ConfigInfo', position: 20 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 20}]
+    @UI.selectionField: [{ position: 20 }]
+    //@UI.dataPoint: { qualifier: 'SysServID', title: 'Service ID'}
+    ZClientId;
+    
+    @EndUserText.label: 'Client Secret'
+    @UI.identification: [{ position: 30 }]
+    @UI.fieldGroup: [{ qualifier: 'ConfigInfo', position: 30 }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 30}]
+    @UI.selectionField: [{ position: 30 }]
+    //@UI.dataPoint: { qualifier: 'SysServID', title: 'Service ID'}
+    ZClientSecret;
+    
+     @EndUserText.label: 'Access Token'
+    @UI.identification: [{ position: 40 }]
+    @UI.fieldGroup: [{ qualifier: 'ConfigInfo', position: 40 }]
+    @Search.defaultSearchElement: true
+    //@UI.lineItem: [{ position: 30}]
+    //@UI.selectionField: [{ position: 40 }]
+    //@UI.dataPoint: { qualifier: 'SysServID', title: 'Service ID'}
+    ZAccessToken;
+    
+    @EndUserText.label: 'Created By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 10 }]
+    @Search.defaultSearchElement: true
+    CreatedBy;
+    
+    @EndUserText.label: 'Created At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 20 }]
+    @Search.defaultSearchElement: true
+    CreatedAt;
+    
+    @EndUserText.label: 'Last Changed By'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 30 }]
+    @Search.defaultSearchElement: true
+    LastChangedBy;
+ 
+    
+
+    @UI: {
+//  lineItem:       [ { position: 100, importance: #HIGH }                          
+//                    ,{ type: #FOR_ACTION, dataAction: 'GetAccessToken', label: 'Get Acccess Token' } ],
+  identification: [ { position: 100 }                          
+                   ,{ type: #FOR_ACTION, dataAction: 'GetAccessToken', label: 'Get Acccess Token13' } ],
+    textArrangement: #TEXT_ONLY
+         }
+     
+     @EndUserText.label: 'Last Changed At'
+    @UI.fieldGroup: [{ qualifier: 'AdminSection', position: 40 }]
+    @Search.defaultSearchElement: true
+    LastChangedAt;  
+}

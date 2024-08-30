@@ -1,0 +1,41 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+
+annotate view ZC_EMPSERVICES
+    with 
+{
+@UI.facet: [
+    {
+                      id: 'EmpServices',
+                      purpose: #STANDARD,
+                      type: #IDENTIFICATION_REFERENCE,
+                      label: 'Employee Services',
+                      position: 10
+                   }
+                   
+                   
+            ]
+               
+                  
+    @EndUserText.label: 'Project'
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 10 }]
+    @UI.identification: [{ position: 10 }]
+    @UI.selectionField: [{ position: 10 }]
+    ProjectName;
+    
+    @EndUserText.label: 'Employee ID'
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    @UI.selectionField: [{ position: 20 }]    
+    //@Consumption.valueHelpDefinition: [{ entity : {name: 'Z_CDS_Employee', element: 'ZEmpId'  } }]
+    ZEmpId;
+    
+
+
+       
+    
+        
+}
